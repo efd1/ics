@@ -1,9 +1,5 @@
-import uuid from 'uuid/v4'
-import {
-  buildEvent,
-  validateEvent,
-  formatEvent
-} from './pipeline'
+import uuid from "uuid/v4"
+import { buildEvent, validateEvent, formatEvent } from "./pipeline"
 
 function assignUniqueId(event) {
   event.uid = event.uid || uuid()
@@ -26,15 +22,24 @@ function reformatEventsByPosition({ error, value }, idx, list) {
 
   if (idx === 0) {
     // beginning of list
-    return { value: value.slice(0, value.indexOf('END:VCALENDAR')), error: null }
+    return {
+      value: value.slice(0, value.indexOf("END:VCALENDAR")),
+      error: null,
+    }
   }
 
   if (idx === list.length - 1) {
     // end of list
-    return { value: value.slice(value.indexOf('BEGIN:VEVENT')), error: null}
+    return { value: value.slice(value.indexOf("BEGIN:VEVENT")), error: null }
   }
 
-  return { error: null, value: value.slice(value.indexOf('BEGIN:VEVENT'), value.indexOf('END:VEVENT') + 12) }
+  return {
+    error: null,
+    value: value.slice(
+      value.indexOf("BEGIN:VEVENT"),
+      value.indexOf("END:VEVENT") + 12
+    ),
+  }
 }
 
 function catenateEvents(accumulator, { error, value }, idx) {
@@ -53,8 +58,10 @@ function catenateEvents(accumulator, { error, value }, idx) {
   return accumulator
 }
 
-export function createEvent (attributes, cb) {
-  if (!attributes) { Error('Attributes argument is required') }
+export function createEvent(attributes, cb) {
+  if (!attributes) {
+    Error("Attributes argument is required")
+  }
 
   assignUniqueId(attributes)
 
@@ -64,11 +71,11 @@ export function createEvent (attributes, cb) {
 
     if (error) return { error, value }
 
-    let event = ''
+    let event = ""
 
     try {
       event = formatEvent(value)
-    } catch(error) {
+    } catch (error) {
       return { error, value: null }
     }
 
@@ -83,16 +90,17 @@ export function createEvent (attributes, cb) {
   return cb(null, formatEvent(value))
 }
 
-export function createEvents (events, cb) {
+export function createEvents(events, cb) {
   if (!events) {
-    return { error: Error('one argument is required'), value: null }
+    return { error: Error("one argument is required"), value: null }
   }
 
   if (events.length === 1) {
     return createEvent(events[0], cb)
   }
 
-  const { error, value } = events.map(assignUniqueId)
+  const { error, value } = events
+    .map(assignUniqueId)
     .map(validateAndBuildEvent)
     .map(applyInitialFormatting)
     .map(reformatEventsByPosition)
