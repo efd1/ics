@@ -1,12 +1,12 @@
 import uuid from "uuid/v4"
-import { buildEvent, validateEvent, formatEvent } from "./pipeline"
+import { buildEvent, formatEvent } from "./pipeline"
 
 function assignUniqueId(event) {
   event.uid = event.uid || uuid()
   return event
 }
 function validateAndBuildEvent(event) {
-  return validateEvent(buildEvent(event))
+  return buildEvent(event)
 }
 
 function applyInitialFormatting({ error, value }) {

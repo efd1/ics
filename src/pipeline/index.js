@@ -1,9 +1,4 @@
-import buildEvent from './build'
-import formatEvent from './format'
-import validateEvent from './validate'
+import buildEvent from "./build"
+import formatEvent from "./format"
 
-export {
-  buildEvent,
-  formatEvent,
-  validateEvent
-}
+export { buildEvent, formatEvent }
