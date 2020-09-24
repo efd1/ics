@@ -1,5 +1,5 @@
 {
-  "name": "ics",
+  "name": "@efd/ics",
   "version": "2.24.0",
   "description": "iCal (ics) file generator",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adamgibbons/ics.git"
+    "url": "git+https://github.com/adamgibbons/ics.git"
   },
   "keywords": [
     "ical",
@@ -41,12 +41,15 @@
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "dayjs": "^1.8.33",
     "lodash": "^4.17.15",
-    "uuid": "^3.3.3",
-    "dayjs": "^1.8.33"
+    "uuid": "^3.3.3"
   },
   "files": [
     "dist/",
     "index.d.ts"
-  ]
+  ],
+  "directories": {
+    "test": "test"
+  }
 }
