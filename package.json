@@ -1,6 +1,6 @@
 {
   "name": "@efd/ics",
-  "version": "2.24.1",
+  "version": "2.24.2",
   "description": "iCal (ics) file generator",
   "main": "index.js",
   "types": "index.d.ts",
