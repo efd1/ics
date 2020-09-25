@@ -6,7 +6,8 @@ function assignUniqueId(event) {
   return event
 }
 function validateAndBuildEvent(event) {
-  return buildEvent(event)
+  // No validate?
+  return { error: null, value: buildEvent(event) }
 }
 
 function applyInitialFormatting({ error, value }) {
